@@ -98,7 +98,7 @@
 
             <p class="section-number">01</p>
 
-            <h2>Project Overview</h2>
+            <h2><b>Project Overview</b></h2>
 
             <p>
             DC motors are widely used in robotic and mechatronic systems where accurate control of motion is required. This project focused on developing a feedback control system capable of controlling both the rotational velocity and angular position of a DC motor. The goal was to make the motor accurately track a desired speed or position rather than simply applying a voltage and allowing the motor to operate without feedback.
@@ -117,7 +117,7 @@ The main engineering problem was achieving stable and accurate motor motion desp
 
             <p class="section-number">02</p>
 
-            <h2>Design Objectives</h2>
+            <h2><b>Design Objectives</b></h2>
 
             <p>
                 The main objectives of the project were:
@@ -141,7 +141,7 @@ The main engineering problem was achieving stable and accurate motor motion desp
 
             <p class="section-number">03</p>
 
-            <h2>System Design</h2>
+            <h2><b>System Design</b></h2>
              <img
                 src="../images/Motor control images/DC Motor Control System Architecture.png"
                 alt="System architecture diagram"
@@ -153,6 +153,26 @@ The main engineering problem was achieving stable and accurate motor motion desp
             <h2>
               <b>Open-Loop Experimental Response</b>
             </h2>
+            <figure class="project-figure">
+                <img
+                    src="../images/Motor control images/open_loop_response.png"
+                    alt="Open-loop PWM command versus steady-state motor angular velocity"
+                >
+
+                <figcaption>
+                Open-loop steady-state relationship between PWM command and motor
+                angular velocity.
+                </figcaption>
+            </figure>
+
+            <p>
+                The motor was tested in open loop by varying the PWM command and
+                measuring the resulting steady-state angular velocity. The measured
+                response shows an approximately linear increase in motor speed as the
+                PWM command increases over the tested range.
+            </p>
+
+
 
             <img
                 src="../images/Motor control images/motor_wiring .jpeg"
@@ -337,271 +357,277 @@ The main engineering problem was achieving stable and accurate motor motion desp
             <h2>
               <b>Position Control Design</b>
             </h2>
-            <img
-                src="../images/Motor control images/position_control_loop.png"
-                alt="Project Name"
-                class="project-main-image"
-            >
-           
-            <p class="image-caption">
-                System architecture of the project.
-            </p>
 
-        </section>
-
-
-
-        <!-- =========================
-             MODELING / ENGINEERING
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">04</p>
-
-            <h2>Engineering & Modeling</h2>
+            <h4>
+             <b><u>Position Feedback Architecture</u></b>
+            </h4>
 
             <p>
-                Explain the engineering analysis behind the project.
-                Depending on the project, this could include:
+                The position-control system uses closed-loop feedback to control the
+                angular position of the motor shaft. The desired angular position,
+                &theta;<sub>ref</sub>(t), is compared with the measured motor position,
+                &theta;<sub>f</sub>(t), to determine the position error:
             </p>
 
-            <ul>
-                <li>Dynamic modeling</li>
-                <li>Free-body diagrams</li>
-                <li>State-space models</li>
-                <li>Transfer functions</li>
-                <li>Finite-element analysis</li>
-                <li>Circuit calculations</li>
-                <li>System identification</li>
-            </ul>
-
-
-            <!-- Example equation -->
             <div class="equation">
-
-                ẋ = Ax + Bu
-
+                e<sub>&theta;</sub>(t)
+                =
+                &theta;<sub>ref</sub>(t)
+                -
+                &theta;<sub>f</sub>(t)
             </div>
 
-
             <p>
-                Explain what the model means and how you used it.
-                Don't include equations just to make the page look technical.
+                The controller uses the position error to determine the motor command.
+                As the motor moves toward the desired angular position, encoder feedback
+                continuously updates the measured position and reduces the error between
+                the commanded and actual positions.
             </p>
 
-        </section>
+            <figure class="project-figure">
+                <img
+                    src="../images/Motor control images/position_control_loop.png"
+                    alt="Closed-loop block diagram for DC motor position control"
+                >
 
+                <figcaption>
+                    Closed-loop architecture used for DC motor position control.
+                </figcaption>
+            </figure>
 
-
-        <!-- =========================
-             CONTROL / SOFTWARE
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">05</p>
-
-            <h2>Control & Software</h2>
-
+            <b><u>Encoder-Based Position Measurement</u></b>
             <p>
-                Explain your controller, algorithm, embedded code,
-                or other software here.
+                The angular position of the motor shaft was determined directly from
+                the cumulative encoder count. With an encoder resolution of 980 counts
+                per revolution, each encoder count represents a known fraction of one
+                complete rotation.
             </p>
 
-
-            <pre class="code-block"><code>
-// Example
-
-error = reference - measurement;
-
-control_signal = Kp * error;
-
-applyControl(control_signal);
-            </code></pre>
-
-
-            <p>
-                Explain why you chose the approach and how the software
-                interacts with the physical system.
-            </p>
-
-        </section>
-
-
-
-        <!-- =========================
-             HARDWARE
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">06</p>
-
-            <h2>Hardware & Implementation</h2>
-
-            <p>
-                Describe the physical hardware used in the project.
-            </p>
-
-
-            <div class="spec-grid">
-
-                <div>
-                    <strong>Controller</strong>
-                    <p>Arduino / RP2040 / etc.</p>
-                </div>
-
-                <div>
-                    <strong>Actuator</strong>
-                    <p>DC Motor / Servo / etc.</p>
-                </div>
-
-                <div>
-                    <strong>Sensors</strong>
-                    <p>Encoder / LDR / IMU / etc.</p>
-                </div>
-
-                <div>
-                    <strong>Motor Driver</strong>
-                    <p>Driver model</p>
-                </div>
-
+            <div class="equation">
+                &theta;(t)
+                =
+                N(t)
+                <span class="fraction">
+                    <span>2&pi;</span>
+                    <span>980</span>
+                </span>
             </div>
 
+            <p>
+                where <em>N(t)</em> is the cumulative encoder count and
+                <em>&theta;(t)</em> is the calculated angular position in radians.
+                This position measurement was used as the feedback signal for the
+                closed-loop position controller.
+            </p>
 
-            <img
-                src="../images/projects/project-name/hardware.jpg"
-                alt="Project hardware"
-                class="project-image"
-            >
+            <b><u>Experimental Tuning</u></b>
+             <p>
+                The position controller was tuned experimentally by adjusting the
+                controller parameters and observing the motor's response to commanded
+                angular positions.
+            </p>
+
+            <p>
+                The response was evaluated qualitatively based on stability,
+                oscillation, overshoot, response speed, and the motor's ability to
+                converge toward and remain near the desired angular position.
+                Controller parameters were adjusted until acceptable position tracking
+                was achieved.
+            </p>
+
+            <b><u>Experimental Position Response</u></b>
+            <p>
+                The final position-control gains used for the experiment were
+                <strong>K<sub>p</sub> = 85</strong>,
+                <strong>K<sub>i</sub> = 4</strong>, and
+                <strong>K<sub>d</sub> = 5</strong>.
+                The controller was tested using a commanded angular position of
+                360&deg;, corresponding to approximately 6.28 rad.
+            </p>
+
+            <figure class="project-figure">
+                <img
+                    src="../images/Motor control images/PID(85,4,5)_360_final_postion_response.png"
+                    alt="Experimental position response of the DC motor to a 360 degree reference command"
+                >
+
+                <figcaption>
+                    Experimental closed-loop position response for a 360&deg;
+                    reference command using
+                    K<sub>p</sub> = 85,
+                    K<sub>i</sub> = 4, and
+                    K<sub>d</sub> = 5.
+                </figcaption>
+            </figure>
+
+            <p>
+                The experimental response shows that the motor rapidly approached the
+                desired angular position with little visible overshoot. After reaching
+                the reference position, the measured position remained close to the
+                commanded value without noticeable sustained oscillation. This tuning
+                provided stable position tracking and allowed the motor to move to and
+                maintain the desired angular position.
+            </p>
+
+
 
         </section>
 
 
 
-        <!-- =========================
-             TESTING
-        ========================== -->
-        <section class="project-section">
+    <section id="testing-results" class="project-section">
 
-            <p class="section-number">07</p>
+    <h2><b>Testing & Results</b></h2>
 
-            <h2>Testing & Results</h2>
+    <p>
+        Experimental testing was performed in three stages: open-loop motor
+        characterization, closed-loop velocity control, and closed-loop
+        position control.
+    </p>
 
-            <p>
-                Explain how you tested the system and what measurements
-                you collected.
-            </p>
+    <p>
+        Open-loop testing showed how the motor's steady-state angular velocity
+        changed with PWM command, providing an initial understanding of the
+        motor's physical response.
+    </p>
 
+    <p>
+        For velocity control, encoder feedback was used to estimate motor
+        angular velocity and regulate the motor toward the desired speed.
+        The final velocity controller used
+        <strong>K<sub>p</sub> = 70</strong>,
+        <strong>K<sub>i</sub> = 25</strong>, and
+        <strong>K<sub>d</sub> = 0</strong>, resulting in stable tracking near
+        the commanded velocity.
+    </p>
 
-            <img
-                src="../images/projects/project-name/results.jpg"
-                alt="Experimental results"
-                class="project-image"
-            >
+    <p>
+        For position control, encoder position feedback was used to move the
+        motor toward and maintain a desired angular position. The final
+        controller used
+        <strong>K<sub>p</sub> = 85</strong>,
+        <strong>K<sub>i</sub> = 4</strong>, and
+        <strong>K<sub>d</sub> = 5</strong>. The motor successfully approached
+        and maintained the 360&deg; reference position with little visible
+        overshoot.
+    </p>
 
+    <section id="challenges" class="project-section">
 
-            <div class="results-grid">
+    <h2><b>Challenges & Engineering Decisions</b></h2>
 
-                <div>
-                    <strong>Result 1</strong>
-                    <p>Value</p>
-                </div>
+    <p>
+        One of the main challenges in the project was converting encoder
+        measurements into useful feedback variables. The encoder count was
+        used directly to determine angular position, while angular velocity
+        had to be estimated from the change in position over a measured time
+        interval.
+    </p>
 
-                <div>
-                    <strong>Result 2</strong>
-                    <p>Value</p>
-                </div>
+    <p>
+        Controller tuning was performed experimentally by testing different combinations of proportional, integral, and derivative gains and observing the resulting motor response. Numerical position and velocity measurements were collected during the experiments and used to generate the response plots. Controller performance was evaluated primarily by visually comparing these plots and observing stability, oscillation, overshoot, and convergence toward the desired reference. The underlying time-series data were not retained after the experiments, so quantitative transient-response metrics such as rise time, settling time, and percent overshoot were not calculated.
+    </p>
 
-                <div>
-                    <strong>Result 3</strong>
-                    <p>Value</p>
-                </div>
+    <p>
+        Another limitation of the original experiment was that complete
+        time-domain open-loop response data were not saved. Although the
+        steady-state relationship between PWM command and motor velocity was
+        characterized, the available data were not sufficient to reliably
+        identify a dynamic transfer-function model of the physical motor.
+    </p>
 
-            </div>
+    </section>
 
+    <section id="future-improvements" class="project-section">
 
-            <p>
-                Explain what these results mean. Did the system meet
-                your original design objectives?
-            </p>
+    <h2><b>Future Improvements</b></h2>
 
-        </section>
+    <p>
+        A future iteration of the project will focus on experimental system
+        identification and quantitative controller evaluation. Rather than
+        relying primarily on qualitative observation, the complete
+        time-domain response of the motor will be recorded and analyzed.
+    </p>
 
+    <h4><b><u>Experimental System Identification</u></b></h4>
 
+    <p>
+        A known step input will be applied to the motor while recording the
+        resulting angular velocity as a function of time. The measured data
+        will then be used to identify an experimental dynamic model of the
+        motor.
+    </p>
 
-        <!-- =========================
-             CHALLENGES
-        ========================== -->
-        <section class="project-section">
+    <div class="equation">
+        Step Input
+        &rarr;
+        &omega;(t) Data
+        &rarr;
+        System Identification
+        &rarr;
+        G(s)
+        &rarr;
+        Model Validation
+    </div>
 
-            <p class="section-number">08</p>
+    <h4><b><u>Quantitative Performance Analysis</u></b></h4>
 
-            <h2>Challenges & Engineering Decisions</h2>
+    <p>
+        Closed-loop response data will also be recorded so that controller
+        performance can be evaluated using standard transient-response
+        specifications such as rise time, settling time, maximum overshoot,
+        and steady-state error.
+    </p>
 
-            <h3>Challenge</h3>
+    <div class="equation">
+        t<sub>r</sub>,
+        &nbsp;
+        t<sub>s</sub>,
+        &nbsp;
+        %OS,
+        &nbsp;
+        e<sub>ss</sub>
+    </div>
 
-            <p>
-                Describe a real problem you encountered.
-            </p>
+    <h4><b><u>Model-Based Controller Design</u></b></h4>
 
+    <p>
+        Once an experimentally validated motor model is available, controller
+        gains can be designed using the identified system dynamics rather than
+        relying primarily on trial-and-error tuning. The predicted response of
+        the model can then be compared directly with the experimental motor
+        response.
+    </p>
 
-            <h3>Investigation</h3>
+    </section>
 
-            <p>
-                Explain how you determined what was causing the problem.
-            </p>
+    <section id="lessons-learned" class="project-section">
 
+    <h2><b>What I Learned</b></h2>
 
-            <h3>Solution</h3>
+    <p>
+        This project provided practical experience implementing feedback
+        control on a physical electromechanical system. I gained experience
+        converting encoder measurements into position and velocity feedback,
+        implementing closed-loop motor control, and experimentally tuning
+        controller gains.
+    </p>
 
-            <p>
-                Explain what you changed and why.
-            </p>
+    <p>
+        The project also demonstrated the difference between applying control
+        theory in simulation and working with a physical system, where sensor
+        measurements, sampling, actuator limitations, and experimental data
+        collection become important parts of the control problem.
+    </p>
 
-        </section>
+    <p>
+        One of the main lessons from the project was the importance of
+        recording complete experimental data. This motivated the next stage
+        of the project, which will focus on system identification, model
+        validation, and quantitative evaluation of controller performance.
+    </p>
 
-
-
-        <!-- =========================
-             WHAT I LEARNED
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">09</p>
-
-            <h2>What I Learned</h2>
-
-            <p>
-                Briefly describe the most important engineering knowledge
-                or skills you developed through the project.
-            </p>
-
-            <ul>
-                <li>Skill or lesson #1</li>
-                <li>Skill or lesson #2</li>
-                <li>Skill or lesson #3</li>
-                <li>Skill or lesson #4</li>
-            </ul>
-
-        </section>
-
-
-
-        <!-- =========================
-             FUTURE IMPROVEMENTS
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">10</p>
-
-            <h2>Future Improvements</h2>
-
-            <p>
-                Explain what you would improve if you continued working
-                on the project.
-            </p>
-
-        </section>
-
+    </section>
 
 
         <!-- =========================
