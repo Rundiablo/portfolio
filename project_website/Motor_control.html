@@ -45,12 +45,11 @@
             </p>
 
             <h1>
-                Project Name
+                DC Motor Position & Velocity Control
             </h1>
 
             <p class="project-summary">
-                Write one or two sentences explaining what the project is,
-                what you built, and the main engineering objective.
+                This project explores the modeling and feedback control of a DC motor for both position and velocity regulation. Controllers were designed and tested to make the motor follow desired position and speed commands while evaluating system response, stability, and control performance. The project connects control-system theory with the behavior of a physical electromechanical system through simulation and experimental testing.
             </p>
 
 
@@ -74,7 +73,7 @@
 
                 <div>
                     <strong>Date</strong>
-                    <p>2026</p>
+                    <p>May 2026</p>
                 </div>
 
             </div>
@@ -82,10 +81,11 @@
 
             <!-- Main project image -->
             <img
-                src="../images/projects/project-name/main-image.jpg"
+                src="../images/Motor control images/motor_wiring .jpeg"
                 alt="Project Name"
                 class="project-main-image"
             >
+            
 
         </section>
 
@@ -101,15 +101,9 @@
             <h2>Project Overview</h2>
 
             <p>
-                Explain the project here. What were you trying to build?
-                Why did you build it? What engineering problem were you
-                trying to solve?
-            </p>
-
-            <p>
-                Give enough information for someone unfamiliar with the
-                project to understand it without going into all of the
-                technical details yet.
+            DC motors are widely used in robotic and mechatronic systems where accurate control of motion is required. This project focused on developing a feedback control system capable of controlling both the rotational velocity and angular position of a DC motor. The goal was to make the motor accurately track a desired speed or position rather than simply applying a voltage and allowing the motor to operate without feedback.
+The project was developed to apply control-system concepts to a physical electromechanical system and investigate the differences between simulated and real-world behavior. A mathematical model of the motor was used to study its response and design controllers in simulation before implementing and testing the control system on the physical motor.
+The main engineering problem was achieving stable and accurate motor motion despite the dynamics and limitations of the physical system. By measuring the motor's actual motion and comparing it with the desired reference, feedback control could be used to continuously correct the motor's behavior and reduce tracking error. This provided a practical way to study how modeling, controller design, simulation, and hardware implementation work together in a real control system.
             </p>
 
         </section>
@@ -130,10 +124,10 @@
             </p>
 
             <ul>
-                <li>Objective or requirement #1</li>
-                <li>Objective or requirement #2</li>
-                <li>Objective or requirement #3</li>
-                <li>Objective or requirement #4</li>
+                <li>Develop a simple mathematical model that represents the dynamic behavior of the DC motor.</li>
+                <li>Design feedback controllers to regulate the rotational velocity and angular position of the motor</li>
+                <li>Simulate the control systems and evaluate their stability, tracking accuracy, and transient response.</li>
+                <li>Implement the controllers on the physical motor and compare the experimental response with the simulated response.</li>
             </ul>
 
         </section>
@@ -148,20 +142,207 @@
             <p class="section-number">03</p>
 
             <h2>System Design</h2>
-
-            <p>
-                Explain how the complete system works and how the major
-                components interact.
-            </p>
-
-
-            <img
-                src="../images/projects/project-name/system-diagram.jpg"
+             <img
+                src="../images/Motor control images/DC Motor Control System Architecture.png"
                 alt="System architecture diagram"
                 class="project-image"
             >
 
+            <p>
+                The system uses encoder feedback to measure the motion of the DC motor and provide feedback to the controller. The same hardware platform was used for both velocity and position control, with the measured output compared against the desired reference to determine the required motor command.
+            <h2>
+              <b>Open-Loop Experimental Response</b>
+            </h2>
 
+            <img
+                src="../images/Motor control images/motor_wiring .jpeg"
+                alt="Project Name"
+                class="project-main-image"
+            >
+            
+            <h2>
+              <b>Velocity Control Design</b>
+            </h2>
+            <h4>
+             <b><u>Velocity Feedback Architecture</u></b>
+            </h4>
+             <p>
+            The velocity control system uses a closed-loop feedback architecture
+            to regulate the rotational speed of the DC motor. The desired angular
+            velocity, <em>&omega;<sub>ref</sub>(t)</em>, is compared with the measured
+            angular velocity, <em>&omega;<sub>f</sub>(t)</em>, to determine the
+            velocity error:
+        </p>
+         <div class="equation">
+            e<sub>&omega;</sub>(t)
+            =
+            &omega;<sub>ref</sub>(t)
+            -
+            &omega;<sub>f</sub>(t)
+        </div>
+
+        <p>
+            The velocity error is supplied to the PID controller, which calculates
+            the motor control input using proportional, integral, and derivative
+            actions:
+        </p>
+          <div class="equation">
+            u(t) =
+            K<sub>p</sub>e<sub>&omega;</sub>(t)
+            +
+            K<sub>i</sub>&int;<sub>0</sub><sup>t</sup>
+            e<sub>&omega;</sub>(&tau;)d&tau;
+            +
+            K<sub>d</sub>
+            <span class="fraction">
+                <span>de<sub>&omega;</sub>(t)</span>
+                <span>dt</span>
+            </span>
+        </div>
+
+        <p>
+            The resulting control signal is applied to the motor, while the
+            measured motor velocity is continuously fed back to the controller.
+            This allows the controller to adjust the motor input based on the
+            difference between the commanded and measured velocity.
+        </p>
+
+        <!-- Velocity Control Block Diagram -->
+        <figure class="project-figure">
+            <img
+                src="../images/Motor control images/velocity_control_ loop.png"
+                alt="Closed-loop PID block diagram for DC motor velocity control"
+            >
+            <figcaption>
+                Closed-loop PID architecture used for DC motor
+                velocity control.
+            </figcaption>
+        </figure>
+
+        <div class="project-subsection"></div>
+        <h4>
+            <b><u>Encoder-Based Velocity Measurement</u></b>
+        </h4>
+
+         <p>
+        The motor's angular velocity was determined from the encoder position
+        measurements. The encoder count was first converted into angular
+        position using the encoder resolution of 980 counts per revolution:
+        </p>
+        
+        <div class="equation">
+            &theta;(t) =
+            N(t)
+            <span class="fraction">
+                <span>2&pi;</span>
+                <span>980</span>
+            </span>
+        </div>
+        <p>
+            where <em>N(t)</em> represents the cumulative encoder count and
+            <em>&theta;(t)</em> is the angular position of the motor shaft in radians.
+        </p>
+
+        <p>
+            The change in angular position between two consecutive measurements was
+            then calculated as:
+        </p>
+
+        <div class="equation">
+            &Delta;&theta; =
+            &theta;<sub>k</sub> -
+            &theta;<sub>k-1</sub>
+        </div>        
+        <p>
+        The elapsed time between the two measurements was also recorded.
+        The angular velocity of the motor was then estimated by dividing the
+        change in angular position by the elapsed time:
+        </p>
+
+        <div class="equation">
+            &omega; =
+            <span class="fraction">
+                <span>&Delta;&theta;</span>
+                <span>&Delta;t</span>
+            </span>
+        </div>
+
+        <p>
+            This produced the motor velocity in radians per second. The calculated
+            angular velocity was then used as the feedback measurement in the
+            closed-loop velocity controller.
+        </p>
+
+        <h4>
+             <b><u>Experimental Tuning</u></b>
+        </h4>
+
+        <p>
+        The PID gains were tuned experimentally by adjusting the controller
+        parameters and observing the resulting motor velocity response.
+        Different gain combinations were tested while monitoring the response
+        of the motor to the desired velocity command.
+        </p>
+
+        <p>
+            The responses were evaluated qualitatively based on stability,
+            oscillation, overshoot, response speed, and the ability of the motor
+            velocity to converge toward the desired value. The controller gains
+            were adjusted until the system produced stable and acceptable velocity
+            tracking.
+        </p>
+
+        <p>
+            Formal transient-response measurements such as rise time, settling
+            time, and maximum overshoot were not calculated during the original
+            experiment. Quantitative performance analysis is therefore identified
+            as an area for improvement in a future iteration of the project.
+        </p>
+
+        <h4>
+             <b><u>Experimental Velocity Response</u></b>
+        </h4>
+
+         <p>
+        The final controller gains selected for the velocity-control experiment
+        were K<sub>p</sub> = 70, K<sub>i</sub> = 25, and
+        K<sub>d</sub> = 0. Although the controller was implemented using a PID
+        structure, the derivative term was disabled in the final tuning,
+        resulting in PI control.
+        </p>
+
+        <figure class="project-figure">
+            <img
+                src="../images/Motor control images/P_I_D(70,25,0)_final_velocity_response.png"
+                alt="Experimental angular velocity response of the DC motor using PI control"
+            >
+
+            <figcaption>
+                Experimental closed-loop angular velocity response using
+                K<sub>p</sub> = 70 and K<sub>i</sub> = 25.
+            </figcaption>
+        </figure>
+
+        <p>
+            The response shows a rapid increase in motor velocity followed by
+            oscillations during the initial transient. As the response progresses,
+            the motor velocity approaches approximately 8 rad/s and remains near
+            this value with relatively small fluctuations. This tuning was selected
+            because it provided stable velocity tracking with an acceptable
+            experimental response.
+        </p>
+
+
+        </div>
+            <h2>
+              <b>Position Control Design</b>
+            </h2>
+            <img
+                src="../images/Motor control images/position_control_loop.png"
+                alt="Project Name"
+                class="project-main-image"
+            >
+           
             <p class="image-caption">
                 System architecture of the project.
             </p>
