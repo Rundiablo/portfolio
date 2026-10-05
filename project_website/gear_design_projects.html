@@ -45,12 +45,14 @@
             </p>
 
             <h1>
-                Project Name
+                Gear Design Series
             </h1>
 
             <p class="project-summary">
-                Write one or two sentences explaining what the project is,
-                what you built, and the main engineering objective.
+                Designed and modeled several common gear types in SolidWorks, including spur,
+                helical, bevel, worm, internal, and planetary gears. The project focused on
+                understanding gear geometry, transmission relationships, CAD modeling, and
+                how different gear arrangements affect speed, torque, and motion.
             </p>
 
 
@@ -59,22 +61,22 @@
 
                 <div>
                     <strong>Type</strong>
-                    <p>Personal Project</p>
+                    <p>Personal Project / Mechanical Design Project</p>
                 </div>
 
                 <div>
                     <strong>Role</strong>
-                    <p>Design, Modeling & Control</p>
+                    <p>Gear Design, CAD Modeling & Assembly</p>
                 </div>
 
                 <div>
                     <strong>Tools</strong>
-                    <p>MATLAB, Simulink, Arduino</p>
+                    <p>SolidWorks</p>
                 </div>
 
                 <div>
                     <strong>Date</strong>
-                    <p>2026</p>
+                    <p>June - July 2026</p>
                 </div>
 
             </div>
@@ -82,7 +84,7 @@
 
             <!-- Main project image -->
             <img
-                src="../images/projects/project-name/main-image.jpg"
+                src="../images/gear design images/Mechanical Gear Assembly Showcase.png"
                 alt="Project Name"
                 class="project-main-image"
             >
@@ -96,21 +98,21 @@
         ========================== -->
         <section class="project-section">
 
-            <p class="section-number">01</p>
+        <p class="section-number">01</p>
+        <h2>Project Overview</h2>
 
-            <h2>Project Overview</h2>
+        <p>
+            This project is a self-directed mechanical design study focused on the
+            geometry, operation, and CAD modeling of several common gear systems.
+            The project includes spur, helical, bevel, worm, internal, and planetary
+            gear designs created in SolidWorks.
+        </p>
 
-            <p>
-                Explain the project here. What were you trying to build?
-                Why did you build it? What engineering problem were you
-                trying to solve?
-            </p>
-
-            <p>
-                Give enough information for someone unfamiliar with the
-                project to understand it without going into all of the
-                technical details yet.
-            </p>
+        <p>
+            The goal was to strengthen my understanding of how gears transmit motion
+            and torque while improving my practical CAD modeling and mechanical
+            assembly skills.
+        </p>
 
         </section>
 
@@ -121,23 +123,19 @@
         ========================== -->
         <section class="project-section">
 
-            <p class="section-number">02</p>
+        <p class="section-number">02</p>
+        <h2>Design Objectives</h2>
 
-            <h2>Design Objectives</h2>
-
-            <p>
-                The main objectives of the project were:
-            </p>
-
-            <ul>
-                <li>Objective or requirement #1</li>
-                <li>Objective or requirement #2</li>
-                <li>Objective or requirement #3</li>
-                <li>Objective or requirement #4</li>
-            </ul>
+        <ul>
+            <li>Understand the geometry and operating principles of common gear types.</li>
+            <li>Model individual gears accurately in SolidWorks.</li>
+            <li>Create mating gear pairs and assemblies with appropriate geometry.</li>
+            <li>Study how gear ratio affects rotational speed, torque, and direction of motion.</li>
+            <li>Develop stronger mechanical CAD and assembly-design skills.</li>
+            <li>Build a foundation for applying gear systems in future robotic and mechatronic projects.</li>
+        </ul>
 
         </section>
-
 
 
         <!-- =========================
@@ -145,281 +143,443 @@
         ========================== -->
         <section class="project-section">
 
-            <p class="section-number">03</p>
+        <p class="section-number">03</p>
+        <h2>Gear Geometry Fundamentals</h2>
 
-            <h2>System Design</h2>
+        <p>
+            Before modeling the different gear systems, several fundamental gear
+            parameters were considered. These parameters determine the size and
+            shape of the gear teeth and ensure that mating gears can properly mesh
+            and transmit motion.
+        </p>
 
-            <p>
-                Explain how the complete system works and how the major
-                components interact.
-            </p>
+        <p>
+            For a standard spur gear, the pitch diameter is related to the number of
+            teeth and module by:
+        </p>
 
+        <div class="equation">
+            d = mN
+        </div>
 
+        <p>
+            where <em>d</em> is the pitch diameter, <em>m</em> is the module, and
+            <em>z</em> is the number of teeth.
+        </p>
+
+        <p>
+            The speed ratio between two mating external gears can be determined from
+            their number of teeth:
+        </p>
+
+        <div class="equation">
+            <span class="fraction">
+                <span>&omega;<sub>1</sub></span>
+                <span>&omega;<sub>2</sub></span>
+            </span>
+            =
+            <span class="fraction">
+                <span>N<sub>2</sub></span>
+                <span>N<sub>1</sub></span>
+            </span>
+        </div>
+
+        <p>
+            Other important parameters considered throughout the project include
+            pressure angle, pitch circle, addendum, dedendum, center distance, and
+            tooth orientation. The specific relationships vary depending on the
+            type of gear being designed.
+        </p>
+
+        </section>
+
+        <section class="project-section">
+
+        <p class="section-number">04</p>
+        <h2>Spur Gear Design</h2>
+
+        <p>
+            The spur gear pair was designed as a 3:1 reduction using a
+            20&deg; pressure angle and a module of 2 mm. The minimum allowable
+            pinion tooth count calculated from the interference and undercutting
+            condition was 15 teeth. A larger value of 18 teeth was selected for
+            the pinion, giving the mating gear 54 teeth.
+        </p>
+
+        <div class="equation">
+            N<sub>p</sub> = 18,
+            &nbsp;&nbsp;
+            N<sub>g</sub> = 54
+        </div>
+
+        <p>
+            The resulting gear ratio is:
+        </p>
+
+        <div class="equation">
+            i =
+            <span class="fraction">
+                <span>N<sub>g</sub></span>
+                <span>N<sub>p</sub></span>
+            </span>
+            =
+            <span class="fraction">
+                <span>54</span>
+                <span>18</span>
+            </span>
+            = 3
+        </div>
+
+        <p>
+            Using a module of 2 mm, the pitch diameters of the pinion and gear are:
+        </p>
+
+        <div class="equation">
+            d<sub>p</sub> = mN<sub>p</sub> = 36 mm
+            &nbsp;&nbsp;&nbsp;
+            d<sub>g</sub> = mN<sub>g</sub> = 108 mm
+        </div>
+
+        <p>
+            The tooth geometry was generated using the AGMA full-depth proportions
+            and a constructed involute profile. The completed pair was assembled in
+            SolidWorks to verify meshing and the intended 3:1 speed reduction.
+        </p>
+
+        <figure class="project-figure">
             <img
-                src="../images/projects/project-name/system-diagram.jpg"
-                alt="System architecture diagram"
-                class="project-image"
+                src="../images/gear design images/spur_gear_assembly.png"
+                alt="SolidWorks spur gear pair with 18-tooth pinion and 54-tooth gear"
             >
-
-
-            <p class="image-caption">
-                System architecture of the project.
-            </p>
-
-        </section>
-
-
-
-        <!-- =========================
-             MODELING / ENGINEERING
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">04</p>
-
-            <h2>Engineering & Modeling</h2>
-
-            <p>
-                Explain the engineering analysis behind the project.
-                Depending on the project, this could include:
-            </p>
-
-            <ul>
-                <li>Dynamic modeling</li>
-                <li>Free-body diagrams</li>
-                <li>State-space models</li>
-                <li>Transfer functions</li>
-                <li>Finite-element analysis</li>
-                <li>Circuit calculations</li>
-                <li>System identification</li>
-            </ul>
-
-
-            <!-- Example equation -->
-            <div class="equation">
-
-                ẋ = Ax + Bu
-
-            </div>
-
-
-            <p>
-                Explain what the model means and how you used it.
-                Don't include equations just to make the page look technical.
-            </p>
+            <figcaption>
+                Spur gear pair designed with an 18-tooth pinion, 54-tooth gear,
+                2 mm module, and 3:1 ratio.
+            </figcaption>
+        </figure>
 
         </section>
 
-
-
-        <!-- =========================
-             CONTROL / SOFTWARE
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">05</p>
-
-            <h2>Control & Software</h2>
-
-            <p>
-                Explain your controller, algorithm, embedded code,
-                or other software here.
-            </p>
-
-
-            <pre class="code-block"><code>
-// Example
-
-error = reference - measurement;
-
-control_signal = Kp * error;
-
-applyControl(control_signal);
-            </code></pre>
-
-
-            <p>
-                Explain why you chose the approach and how the software
-                interacts with the physical system.
-            </p>
-
-        </section>
-
-
-
-        <!-- =========================
-             HARDWARE
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">06</p>
-
-            <h2>Hardware & Implementation</h2>
-
-            <p>
-                Describe the physical hardware used in the project.
-            </p>
-
-
-            <div class="spec-grid">
-
-                <div>
-                    <strong>Controller</strong>
-                    <p>Arduino / RP2040 / etc.</p>
-                </div>
-
-                <div>
-                    <strong>Actuator</strong>
-                    <p>DC Motor / Servo / etc.</p>
-                </div>
-
-                <div>
-                    <strong>Sensors</strong>
-                    <p>Encoder / LDR / IMU / etc.</p>
-                </div>
-
-                <div>
-                    <strong>Motor Driver</strong>
-                    <p>Driver model</p>
-                </div>
-
-            </div>
-
-
-            <img
-                src="../images/projects/project-name/hardware.jpg"
-                alt="Project hardware"
-                class="project-image"
-            >
-
-        </section>
-
-
-
-        <!-- =========================
-             TESTING
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">07</p>
-
-            <h2>Testing & Results</h2>
-
-            <p>
-                Explain how you tested the system and what measurements
-                you collected.
-            </p>
-
-
-            <img
-                src="../images/projects/project-name/results.jpg"
-                alt="Experimental results"
-                class="project-image"
-            >
-
-
-            <div class="results-grid">
-
-                <div>
-                    <strong>Result 1</strong>
-                    <p>Value</p>
-                </div>
-
-                <div>
-                    <strong>Result 2</strong>
-                    <p>Value</p>
-                </div>
-
-                <div>
-                    <strong>Result 3</strong>
-                    <p>Value</p>
-                </div>
-
-            </div>
-
-
-            <p>
-                Explain what these results mean. Did the system meet
-                your original design objectives?
-            </p>
-
-        </section>
-
-
-
-        <!-- =========================
-             CHALLENGES
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">08</p>
-
-            <h2>Challenges & Engineering Decisions</h2>
-
-            <h3>Challenge</h3>
-
-            <p>
-                Describe a real problem you encountered.
-            </p>
-
-
-            <h3>Investigation</h3>
-
-            <p>
-                Explain how you determined what was causing the problem.
-            </p>
-
-
-            <h3>Solution</h3>
-
-            <p>
-                Explain what you changed and why.
-            </p>
-
-        </section>
-
-
-
-        <!-- =========================
-             WHAT I LEARNED
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">09</p>
-
-            <h2>What I Learned</h2>
-
-            <p>
-                Briefly describe the most important engineering knowledge
-                or skills you developed through the project.
-            </p>
-
-            <ul>
-                <li>Skill or lesson #1</li>
-                <li>Skill or lesson #2</li>
-                <li>Skill or lesson #3</li>
-                <li>Skill or lesson #4</li>
-            </ul>
-
-        </section>
-
-
-
-        <!-- =========================
-             FUTURE IMPROVEMENTS
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">10</p>
-
-            <h2>Future Improvements</h2>
-
-            <p>
-                Explain what you would improve if you continued working
-                on the project.
-            </p>
-
-        </section>
+       <section class="project-section">
+
+    <p class="section-number">05</p>
+    <h2>Helical Gear Design</h2>
+
+    <p>
+        The helical gear pair was designed as a 3:1 reduction using a
+        20&deg; normal pressure angle, a 20&deg; helix angle, and a module
+        of 2 mm. The minimum pinion tooth count calculated from the
+        interference and undercutting condition was 14 teeth. An 18-tooth
+        pinion was selected and paired with a 54-tooth gear.
+    </p>
+
+    <div class="equation">
+        N<sub>p</sub> = 18,
+        &nbsp;&nbsp;
+        N<sub>g</sub> = 54,
+        &nbsp;&nbsp;
+        &beta; = 20&deg;
+    </div>
+
+    <p>
+        The resulting transmission ratio is:
+    </p>
+
+    <div class="equation">
+        i =
+        <span class="fraction">
+            <span>54</span>
+            <span>18</span>
+        </span>
+        = 3
+    </div>
+
+    <p>
+        Unlike the spur gear, the teeth are inclined relative to the gear axis.
+        The 20&deg; helix angle allows tooth engagement to occur progressively
+        across the face of the gear rather than along the full tooth width at
+        once.
+    </p>
+
+    <p>
+        The tooth geometry was created using the same AGMA full-depth and
+        constructed involute design approach used throughout the project.
+        Opposite helix directions were used on the mating gears to allow proper
+        meshing between parallel shafts.
+    </p>
+
+    <figure class="project-figure">
+        <img
+            src="../images/gear design images/helical_gear_assembly.png"
+            alt="SolidWorks helical gear pair"
+        >
+        <figcaption>
+            Helical gear pair with a 3:1 ratio, 20&deg; normal pressure angle,
+            and 20&deg; helix angle.
+        </figcaption>
+    </figure>
+
+    </section>
+
+    <section class="project-section">
+
+    <p class="section-number">06</p>
+    <h2>Bevel Gear Design</h2>
+
+    <p>
+        The bevel gear pair was designed to transmit rotary motion between
+        shafts intersecting at 90&deg;. A 2:1 gear reduction was selected using
+        a 16-tooth pinion and a 32-tooth gear. Both gears were designed with a
+        20&deg; pressure angle, a module of 2 mm, and an 8 mm face width.
+    </p>
+
+    <div class="equation">
+        N<sub>p</sub> = 16,
+        &nbsp;&nbsp;
+        N<sub>g</sub> = 32,
+        &nbsp;&nbsp;
+        i = 2
+    </div>
+
+    <p>
+        For a 90&deg; shaft angle, the pitch cone angles are determined from
+        the tooth-count relationship:
+    </p>
+
+    <div class="equation">
+        &delta;<sub>p</sub> =
+        tan<sup>-1</sup>
+        (
+        N<sub>p</sub> / N<sub>g</sub>
+        )
+        &asymp; 26.6&deg;
+    </div>
+
+    <div class="equation">
+        &delta;<sub>g</sub> =
+        90&deg; - &delta;<sub>p</sub>
+        &asymp; 63.4&deg;
+    </div>
+
+    <p>
+        The gear teeth were constructed around conical pitch surfaces so that
+        the mating gears could transmit motion through the 90&deg; change in
+        shaft direction. The tooth profiles were generated using the involute
+        construction approach used throughout the gear-design series.
+    </p>
+
+    <figure class="project-figure">
+        <img
+            src="../images/gear design images/bevel_gear_assembly.png"
+            alt="SolidWorks bevel gear pair transmitting motion between perpendicular shafts"
+        >
+        <figcaption>
+            2:1 bevel gear pair designed for perpendicular 90&deg; shafts.
+        </figcaption>
+    </figure>
+
+    </section>
+
+    <section class="project-section">
+
+    <p class="section-number">07</p>
+    <h2>Worm Gear Design</h2>
+
+    <p>
+        The worm gear system was designed as a compact 20:1 speed reducer.
+        A single-start worm was paired with a 20-tooth worm wheel using a
+        module of 2 mm.
+    </p>
+
+    <div class="equation">
+        N<sub>w</sub> = 1,
+        &nbsp;&nbsp;
+        N<sub>g</sub> = 20
+    </div>
+
+    <div class="equation">
+        i =
+        <span class="fraction">
+            <span>N<sub>g</sub></span>
+            <span>N<sub>w</sub></span>
+        </span>
+        =
+        <span class="fraction">
+            <span>20</span>
+            <span>1</span>
+        </span>
+        = 20
+    </div>
+
+    <p>
+        The worm was created from a 20 mm pitch-diameter cylinder using a
+        helical profile. With a module of 2 mm and a single-start worm, the
+        axial pitch was approximately:
+    </p>
+
+    <div class="equation">
+        p = &pi;m = &pi;(2) &asymp; 6.28 mm
+    </div>
+
+    <p>
+        The corresponding lead angle was approximately 5.7&deg;. A
+        20&deg; trapezoidal profile was swept along the helix to construct
+        the worm thread.
+    </p>
+
+    <p>
+        The mating worm wheel contained 20 teeth and had a pitch diameter of
+        40 mm. The completed arrangement provides a large speed reduction in a
+        compact configuration while transmitting motion between non-parallel,
+        non-intersecting shafts.
+    </p>
+
+    <figure class="project-figure">
+        <img
+            src="../images/gear design images/worm_and gear assembly.png"
+            alt="SolidWorks worm and worm wheel speed reducer"
+        >
+        <figcaption>
+            Single-start worm and 20-tooth worm wheel forming a 20:1 speed
+            reduction.
+        </figcaption>
+    </figure>
+
+    </section>
+
+    <section class="project-section">
+
+    <p class="section-number">10</p>
+    <h2>CAD & Assembly</h2>
+
+    <p>
+        Each gear system was modeled in SolidWorks using dimensions calculated
+        from the selected gear ratio, module, pressure angle, tooth count, and
+        other geometry specific to the gear type. The tooth profiles were
+        created using constructed involute geometry and patterned around the
+        corresponding gear body.
+    </p>
+
+    <p>
+        After the individual components were completed, mating gears were placed
+        into assemblies to verify their relative position, center distance, shaft
+        orientation, and meshing geometry. This made it possible to visualize how
+        each transmission configuration would operate as a complete mechanical
+        system rather than as isolated components.
+    </p>
+
+    <p>
+        The assemblies included parallel-shaft spur and helical gears,
+        perpendicular-shaft bevel and worm gear arrangements, and a planetary
+        gearbox consisting of a sun gear, three planet gears, a fixed internal
+        ring gear, and an output carrier.
+    </p>
+
+    </section>   
+
+    <section class="project-section">
+
+    <p class="section-number">11</p>
+    <h2>Design Considerations</h2>
+
+    <p>
+        Several geometric and mechanical considerations were used throughout
+        the gear-design process. All gears were based on AGMA full-depth
+        involute tooth proportions, with a 20&deg; pressure angle used throughout
+        the designs.
+    </p>
+
+    <p>
+        Tooth counts were selected not only to achieve the desired transmission
+        ratios, but also to avoid interference and undercutting. The minimum
+        allowable pinion tooth count was calculated where applicable before a
+        final tooth count was selected.
+    </p>
+
+    <p>
+        Proper meshing also required consideration of pitch diameter, center
+        distance, tooth orientation, and shaft arrangement. Additional
+        parameters were required for specific gear types, including helix angle
+        for helical gears, pitch-cone geometry for bevel gears, lead geometry
+        for the worm drive, and compatible sun, planet, and ring gear tooth
+        counts for the planetary gearbox.
+    </p>
+
+    <p>
+        These constraints demonstrated that gear design involves more than
+        selecting a desired gear ratio. The geometry of each component must also
+        be compatible with the mating gear and with the overall transmission
+        arrangement.
+    </p>
+
+    </section>
+
+    <section class="project-section">
+
+    <p class="section-number">12</p>
+    <h2>What I Learned</h2>
+
+    <p>
+        This project improved my understanding of how gear geometry translates
+        into practical mechanical transmission design. I gained experience
+        calculating gear dimensions, selecting tooth counts, checking for
+        interference and undercutting, and constructing involute tooth profiles
+        from geometric relationships.
+    </p>
+
+    <p>
+        Modeling several different gear types also showed how transmission
+        requirements influence the geometry of the mechanism. Spur and helical
+        gears provided relatively straightforward parallel-shaft transmission,
+        while bevel gears required pitch-cone geometry, worm gears introduced
+        lead and helix relationships, and the planetary gearbox required several
+        gears to satisfy geometric and kinematic constraints simultaneously.
+    </p>
+
+    <p>
+        The project also strengthened my SolidWorks skills in sketching,
+        patterned features, lofted and swept geometry, assemblies, and designing
+        mechanical components from calculated dimensions rather than relying
+        only on predefined CAD models.
+    </p>
+
+    </section>
+
+    <section class="project-section">
+
+    <p class="section-number">13</p>
+    <h2>Future Improvements</h2>
+
+    <p>
+        Future development of the project would focus on moving beyond geometric
+        modeling and evaluating the gear systems under realistic operating
+        conditions.
+    </p>
+
+    <p>
+        Additional work could include performing motion studies to verify the
+        expected speed ratios and rotational directions, evaluating interference
+        and contact throughout a complete rotation, and introducing realistic
+        backlash and manufacturing tolerances into the assemblies.
+    </p>
+
+    <p>
+        Gear-tooth stresses could also be evaluated using analytical gear-design
+        methods and finite element analysis to investigate bending stress,
+        contact stress, and the influence of transmitted torque. Material
+        selection, shaft and bearing design, lubrication, and manufacturability
+        could then be incorporated to develop complete gearbox designs.
+    </p>
+
+    <p>
+        A further extension would be to manufacture or 3D print selected gear
+        systems and experimentally measure their speed reduction, torque
+        transmission, backlash, and efficiency for comparison with the
+        theoretical designs.
+    </p>
+
+    </section>
+
+        
 
 
 
