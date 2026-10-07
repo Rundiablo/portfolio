@@ -45,12 +45,13 @@
             </p>
 
             <h1>
-                Project Name
+                Inverted Pendulum Control System
             </h1>
 
             <p class="project-summary">
-                Write one or two sentences explaining what the project is,
-                what you built, and the main engineering objective.
+            Developed a two-wheeled self-balancing robot that uses sensor feedback,
+            embedded control, and motor actuation to maintain an upright position
+            despite the system's natural instability.
             </p>
 
 
@@ -69,12 +70,12 @@
 
                 <div>
                     <strong>Tools</strong>
-                    <p>MATLAB, Simulink, Arduino</p>
+                    <p>MATLAB, Arduino</p>
                 </div>
 
                 <div>
                     <strong>Date</strong>
-                    <p>2026</p>
+                    <p>August 2026</p>
                 </div>
 
             </div>
@@ -82,7 +83,7 @@
 
             <!-- Main project image -->
             <img
-                src="../images/projects/project-name/main-image.jpg"
+                src="../images/pid_controller_images/Self-Balancing Robot Control Architecture.png"
                 alt="Project Name"
                 class="project-main-image"
             >
@@ -96,21 +97,23 @@
         ========================== -->
         <section class="project-section">
 
-            <p class="section-number">01</p>
+        <p class="section-number">01</p>
+        <h2>Project Overview</h2>
 
-            <h2>Project Overview</h2>
+        <p>
+            This project focuses on the development of a two-wheeled self-balancing
+            robot. Because the robot's center of mass is positioned above the wheel
+            axle, the upright configuration is naturally unstable and requires
+            continuous corrective motion to maintain balance.
+        </p>
 
-            <p>
-                Explain the project here. What were you trying to build?
-                Why did you build it? What engineering problem were you
-                trying to solve?
-            </p>
-
-            <p>
-                Give enough information for someone unfamiliar with the
-                project to understand it without going into all of the
-                technical details yet.
-            </p>
+        <p>
+            The robot uses sensor measurements to estimate its orientation and a
+            feedback controller to determine how the wheels should move in response
+            to changes in body angle. The project combines mechanical design,
+            sensing, embedded programming, motor actuation, and feedback control in
+            a single mechatronic system.
+        </p>
 
         </section>
 
@@ -119,55 +122,138 @@
         <!-- =========================
              OBJECTIVES
         ========================== -->
+        <!-- 02 Design Objectives -->
         <section class="project-section">
 
-            <p class="section-number">02</p>
+        <p class="section-number">02</p>
+        <h2>Design Objectives</h2>
 
-            <h2>Design Objectives</h2>
+        <ul>
+            <li>Design and construct a two-wheeled robot capable of balancing about its wheel axle.</li>
 
-            <p>
-                The main objectives of the project were:
-            </p>
+            <li>Measure the robot's orientation using onboard sensor feedback.</li>
 
-            <ul>
-                <li>Objective or requirement #1</li>
-                <li>Objective or requirement #2</li>
-                <li>Objective or requirement #3</li>
-                <li>Objective or requirement #4</li>
-            </ul>
+            <li>Implement a real-time feedback controller on a microcontroller.</li>
+
+            <li>Control the wheel motors to correct deviations from the upright position.</li>
+
+            <li>Experimentally tune the controller to improve balancing behavior.</li>
+
+            <li>Evaluate the physical limitations of the robot and identify areas for future improvement.</li>
+        </ul>
 
         </section>
+
+
 
 
 
         <!-- =========================
              SYSTEM DESIGN
         ========================== -->
+        <!-- 03 System Design -->
         <section class="project-section">
 
-            <p class="section-number">03</p>
+        <p class="section-number">03</p>
+        <h2>System Design</h2>
 
-            <h2>System Design</h2>
+        <p>
+            The self-balancing robot uses a closed-loop feedback system to maintain
+            its body near the upright position. An MPU6050 inertial measurement
+            unit is used to determine the robot's roll angle, while an Arduino
+            processes the measured angle and executes the PID control algorithm.
+            The resulting control signal is sent to a Cytron MDD10A dual-channel
+            motor driver, which drives the two DC motors.
+        </p>
 
-            <p>
-                Explain how the complete system works and how the major
-                components interact.
-            </p>
-
-
+        <figure class="project-figure">
             <img
-                src="../images/projects/project-name/system-diagram.jpg"
-                alt="System architecture diagram"
-                class="project-image"
+                src="../images/pid_controller_images/Inverted_pendulum.jpeg"
+                alt="System architecture of the two-wheeled self-balancing robot"
             >
 
+            <figcaption>
+                Feedback-control architecture of the two-wheeled self-balancing robot.
+            </figcaption>
+        </figure>
 
-            <p class="image-caption">
-                System architecture of the project.
-            </p>
+
+        <h3>3.1 Orientation Measurement</h3>
+
+        <p>
+            An MPU6050 inertial measurement unit was used to obtain the roll angle
+            of the robot. The upright position was defined as a desired angle of
+            0&deg;. The measured roll angle therefore indicates how far the robot
+            has tilted away from its desired vertical orientation.
+        </p>
+
+
+        <h3>3.2 Feedback Error</h3>
+
+        <p>
+            The measured roll angle was compared with the desired upright angle to
+            generate the feedback error used by the controller:
+        </p>
+
+        <div class="equation">
+            e(t) =
+            &theta;<sub>current</sub>(t)
+            -
+            &theta;<sub>desired</sub>(t)
+        </div>
+
+        <p>
+            Since the desired orientation was 0&deg;, the magnitude and sign of the
+            error represented both the amount and direction of the robot's tilt.
+        </p>
+
+
+        <h3>3.3 PID Control</h3>
+
+        <p>
+            The angular error was supplied to a PID controller running on the
+            Arduino. The controller calculated the corrective motor command based
+            on the current error, accumulated error, and rate of change of the
+            error.
+        </p>
+
+        <div class="equation">
+            u(t) =
+            K<sub>p</sub>e(t)
+            +
+            K<sub>i</sub>&int;e(t)dt
+            +
+            K<sub>d</sub>
+            <span class="fraction">
+                <span>de(t)</span>
+                <span>dt</span>
+            </span>
+        </div>
+
+        <p>
+            The resulting controller output determined the PWM command and motor
+            direction required to oppose the direction in which the robot was
+            falling.
+        </p>
+
+
+        <h3>3.4 Motor Driver and Corrective Motion</h3>
+
+        <p>
+            The Arduino sent the calculated PWM and direction commands to a
+            Cytron MDD10A dual-channel DC motor driver. The motor driver supplied
+            power to the two DC motors, causing the wheels to accelerate in the
+            direction required by the controller.
+        </p>
+
+        <p>
+            By driving the wheels toward the direction of the fall, the wheel
+            contact point was moved beneath the robot's center of mass. This
+            produced the corrective motion required to oppose the falling motion
+            and restore the robot toward its upright position.
+        </p>
 
         </section>
-
 
 
         <!-- =========================
@@ -175,253 +261,246 @@
         ========================== -->
         <section class="project-section">
 
-            <p class="section-number">04</p>
+        <p class="section-number">04</p>
+        <h2>Control Concept</h2>
 
-            <h2>Engineering & Modeling</h2>
+        <p>
+            The upright position of the robot is naturally unstable because its
+            center of mass is located above the wheel axle. When the body begins
+            to tilt away from the vertical position, gravity causes the tilt to
+            increase unless corrective wheel motion is generated.
+        </p>
 
-            <p>
-                Explain the engineering analysis behind the project.
-                Depending on the project, this could include:
-            </p>
+        <p>
+            The desired balancing angle was defined as 0&deg;. The controller
+            compared the measured roll angle with this reference to determine the
+            balance error:
+        </p>
 
-            <ul>
-                <li>Dynamic modeling</li>
-                <li>Free-body diagrams</li>
-                <li>State-space models</li>
-                <li>Transfer functions</li>
-                <li>Finite-element analysis</li>
-                <li>Circuit calculations</li>
-                <li>System identification</li>
-            </ul>
+        <div class="equation">
+            e(t) =
+            &theta;<sub>current</sub>(t)
+            -
+            &theta;<sub>desired</sub>(t)
+        </div>
 
+        <p>
+            The sign of the error indicates the direction in which the robot is
+            tilting, while its magnitude indicates how far the body has moved from
+            the upright position.
+        </p>
 
-            <!-- Example equation -->
-            <div class="equation">
-
-                ẋ = Ax + Bu
-
-            </div>
-
-
-            <p>
-                Explain what the model means and how you used it.
-                Don't include equations just to make the page look technical.
-            </p>
-
-        </section>
-
-
-
-        <!-- =========================
-             CONTROL / SOFTWARE
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">05</p>
-
-            <h2>Control & Software</h2>
-
-            <p>
-                Explain your controller, algorithm, embedded code,
-                or other software here.
-            </p>
-
-
-            <pre class="code-block"><code>
-// Example
-
-error = reference - measurement;
-
-control_signal = Kp * error;
-
-applyControl(control_signal);
-            </code></pre>
-
-
-            <p>
-                Explain why you chose the approach and how the software
-                interacts with the physical system.
-            </p>
+        <p>
+            To correct the tilt, the wheels are driven in the direction of the fall.
+            This moves the wheel contact point beneath the robot's center of mass
+            and produces the corrective motion required to restore the body toward
+            the upright position.
+        </p>
 
         </section>
 
-
-
-        <!-- =========================
-             HARDWARE
-        ========================== -->
         <section class="project-section">
 
-            <p class="section-number">06</p>
+        <p class="section-number">05</p>
+        <h2>Orientation Measurement</h2>
 
-            <h2>Hardware & Implementation</h2>
+        <p>
+            An MPU6050 inertial measurement unit was used to determine the roll
+            angle of the robot. The measured roll angle represented the orientation
+            of the robot body relative to its desired upright position.
+        </p>
 
-            <p>
-                Describe the physical hardware used in the project.
-            </p>
+        <p>
+            The angle measurement was continuously read by the Arduino and used as
+            the feedback variable for the balancing controller. With the desired
+            angle set to 0&deg;, any positive or negative deviation represented a
+            tilt that required corrective motor action.
+        </p>
 
+        <div class="equation">
+            &theta;<sub>feedback</sub>(t)
+            =
+            &theta;<sub>roll</sub>(t)
+        </div>
 
-            <div class="spec-grid">
+        <p>
+            This measurement formed the connection between the physical motion of
+            the robot and the feedback-control algorithm running on the
+            microcontroller.
+        </p>
 
-                <div>
-                    <strong>Controller</strong>
-                    <p>Arduino / RP2040 / etc.</p>
-                </div>
+        </section>
+        
 
-                <div>
-                    <strong>Actuator</strong>
-                    <p>DC Motor / Servo / etc.</p>
-                </div>
+        <section class="project-section">
 
-                <div>
-                    <strong>Sensors</strong>
-                    <p>Encoder / LDR / IMU / etc.</p>
-                </div>
+        <p class="section-number">06</p>
+        <h2>Controller Implementation & Tuning</h2>
 
-                <div>
-                    <strong>Motor Driver</strong>
-                    <p>Driver model</p>
-                </div>
+        <p>
+            A PID controller was implemented on the Arduino to generate the
+            corrective motor command required for balancing. The controller used
+            the difference between the measured roll angle and the desired upright
+            angle as its input.
+        </p>
 
-            </div>
+        <div class="equation">
+            u(t) =
+            K<sub>p</sub>e(t)
+            +
+            K<sub>i</sub>&int;<sub>0</sub><sup>t</sup>e(&tau;)d&tau;
+            +
+            K<sub>d</sub>
+            <span class="fraction">
+                <span>de(t)</span>
+                <span>dt</span>
+            </span>
+        </div>
 
+        <p>
+            The resulting controller output determined both the direction and
+            magnitude of the motor command. The Arduino generated a PWM signal,
+            which was sent to the Cytron MDD10A motor driver to control the two DC
+            motors.
+        </p>
 
-            <img
-                src="../images/projects/project-name/hardware.jpg"
-                alt="Project hardware"
-                class="project-image"
+        <p>
+            The PID gains were tuned experimentally by adjusting the proportional,
+            integral, and derivative terms while observing the robot's balancing
+            behavior. The response was evaluated based on how quickly the robot
+            corrected its tilt, whether excessive oscillation occurred, and whether
+            the robot was able to remain near the upright position.
+        </p>
+
+        </section>
+
+        <section class="project-section">
+
+        <p class="section-number">07</p>
+        <h2>Experimental Testing & Results</h2>
+
+        <p>
+            The completed self-balancing robot was tested experimentally using the
+            PID controller and MPU6050 orientation feedback. During testing, the
+            controller continuously adjusted the wheel motion in response to changes
+            in the measured roll angle in an attempt to maintain the robot near the
+            desired upright position.
+        </p>
+
+        <h3>7.1 Balancing Demonstration</h3>
+
+        <p>
+            The video below shows the physical robot operating under closed-loop
+            control. As the robot begins to tilt, the controller drives the wheels
+            in the direction of the fall to generate corrective motion and maintain
+            balance.
+        </p>
+
+        <video class="project-video" controls>
+            <source
+                src="../videos/Inverted_pendulum_video.mp4"
+                type="video/mp4"
             >
+            Your browser does not support the video element.
+        </video>
 
         </section>
 
-
-
-        <!-- =========================
-             TESTING
-        ========================== -->
         <section class="project-section">
 
-            <p class="section-number">07</p>
+        <p class="section-number">09</p>
+        <h2>Challenges & Engineering Decisions</h2>
 
-            <h2>Testing & Results</h2>
+        <p>
+            One of the main challenges was obtaining an orientation measurement that
+            was sufficiently responsive and stable for real-time balancing. Because
+            the controller depends directly on the measured roll angle, variations
+            or noise in the sensor measurement could cause unnecessary motor
+            corrections and contribute to oscillatory behavior.
+        </p>
 
-            <p>
-                Explain how you tested the system and what measurements
-                you collected.
-            </p>
+        <p>
+            PID tuning was also performed experimentally. Increasing the controller
+            gains could improve the speed of correction, but overly aggressive
+            gains could cause the robot to oscillate or respond too strongly to
+            small changes in angle. The final tuning therefore required balancing
+            response speed with stability.
+        </p>
 
-
-            <img
-                src="../images/projects/project-name/results.jpg"
-                alt="Experimental results"
-                class="project-image"
-            >
-
-
-            <div class="results-grid">
-
-                <div>
-                    <strong>Result 1</strong>
-                    <p>Value</p>
-                </div>
-
-                <div>
-                    <strong>Result 2</strong>
-                    <p>Value</p>
-                </div>
-
-                <div>
-                    <strong>Result 3</strong>
-                    <p>Value</p>
-                </div>
-
-            </div>
-
-
-            <p>
-                Explain what these results mean. Did the system meet
-                your original design objectives?
-            </p>
+        <p>
+            The project also demonstrated the importance of motor response,
+            mechanical construction, sensor placement, and electrical integration.
+            Unlike an ideal simulation, the physical robot introduced effects such
+            as motor limitations, sensor noise, friction, and structural behavior
+            that influenced the balancing performance.
+        </p>
 
         </section>
 
-
-
-        <!-- =========================
-             CHALLENGES
-        ========================== -->
         <section class="project-section">
 
-            <p class="section-number">08</p>
+        <p class="section-number">10</p>
+        <h2>Future Improvements</h2>
 
-            <h2>Challenges & Engineering Decisions</h2>
+        <p>
+            A future iteration of the project will focus on improving both the
+            experimental measurement process and the control-system design.
+        </p>
 
-            <h3>Challenge</h3>
+        <h3>10.1 Dedicated Onboard Power Supply</h3>
 
-            <p>
-                Describe a real problem you encountered.
-            </p>
+        <p>
+            A future improvement would be to power the robot using a dedicated onboard
+            battery rather than relying on external power and communication cables during
+            operation. During testing, the wires connected to the computer and power
+            supply occasionally interfered with the motion of the robot and could
+            physically disturb the balancing system.
+        </p>
 
+        <p>
+            Using an onboard battery would remove these external disturbances, allow the
+            robot to move more freely, and provide a more realistic evaluation of the
+            controller's balancing performance.
+        </p>
 
-            <h3>Investigation</h3>
+        <h3>10.2 Experimental Data Recording</h3>
 
-            <p>
-                Explain how you determined what was causing the problem.
-            </p>
+        <p>
+            Future experiments will record the complete time history of the roll
+            angle, controller output, and motor commands. Saving this numerical data
+            would allow the balancing response to be evaluated quantitatively rather
+            than primarily through visual observation.
+        </p>
 
+        <h3>10.3 Dynamic Modeling and Simulation</h3>
 
-            <h3>Solution</h3>
+        <p>
+            A more accurate dynamic model of the physical robot could be developed
+            using the measured mass distribution, wheel geometry, motor
+            characteristics, and rotational inertia of the system. The model could
+            then be implemented in simulation and compared with the behavior of the
+            physical robot.
+        </p>
 
-            <p>
-                Explain what you changed and why.
-            </p>
+        <h3>10.4 State-Space and Model-Based Control</h3>
 
-        </section>
+        <p>
+            The robot could also be represented using a state-space model containing
+            variables such as body angle, angular velocity, wheel position, and
+            wheel velocity. This would allow controllers such as state-feedback or
+            LQR to be investigated and compared with the experimentally tuned PID
+            controller.
+        </p>
 
+        <h3>10.5 Quantitative Performance Analysis</h3>
 
+        <p>
+            Recorded experimental data could be used to evaluate metrics such as
+            maximum angular deviation, recovery time after a disturbance, steady
+            balancing error, and the magnitude of the required motor command.
+        </p>
 
-        <!-- =========================
-             WHAT I LEARNED
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">09</p>
-
-            <h2>What I Learned</h2>
-
-            <p>
-                Briefly describe the most important engineering knowledge
-                or skills you developed through the project.
-            </p>
-
-            <ul>
-                <li>Skill or lesson #1</li>
-                <li>Skill or lesson #2</li>
-                <li>Skill or lesson #3</li>
-                <li>Skill or lesson #4</li>
-            </ul>
-
-        </section>
-
-
-
-        <!-- =========================
-             FUTURE IMPROVEMENTS
-        ========================== -->
-        <section class="project-section">
-
-            <p class="section-number">10</p>
-
-            <h2>Future Improvements</h2>
-
-            <p>
-                Explain what you would improve if you continued working
-                on the project.
-            </p>
-
-        </section>
-
-
+        </section>  
 
         <!-- =========================
              PROJECT LINKS
@@ -437,6 +516,34 @@ applyControl(control_signal);
             <a href="#" class="button secondary-button">
                 View Report
             </a>
+
+        </section>
+
+        <section class="project-section">
+
+        <p class="section-number">11</p>
+        <h2>What I Learned</h2>
+
+        <p>
+            This project provided practical experience controlling a naturally
+            unstable physical system using real-time sensor feedback. I gained
+            experience integrating an inertial measurement unit, Arduino
+            microcontroller, motor driver, DC motors, and a PID controller into a
+            complete mechatronic system.
+        </p>
+
+        <p>
+            The project also demonstrated how strongly physical implementation
+            affects control-system performance. Sensor measurements, controller
+            tuning, motor response, and mechanical construction all influence
+            whether the robot can maintain balance.
+        </p>
+
+        <p>
+            The experience motivated further study of dynamic modeling, state-space
+            methods, sensor fusion, and model-based controller design so that future
+            versions of the robot can be designed and evaluated more systematically.
+        </p>
 
         </section>
 
